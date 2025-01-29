@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const mainRoutes = require('./routes/main');
 const errorController = require('./controllers/error');
+const sequelize = require('./database');
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -16,6 +17,12 @@ app.use(mainRoutes);
 app.use(errorController.get404);
 
 const port = 3000;
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+
+sequelize
+  .sync()
+  .then(() => {
+    app.listen(port);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
