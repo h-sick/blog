@@ -2,9 +2,10 @@
 </head>
 <body>
   <%- include('includes/navigation.ejs') %>
-  <div>
+  <div class="blog-list">
+    <button><a href="/blog/new">New Blog</a></button>
     <h1>blogs</h1>
-    <%- include('blog.ejs') %>
+    <%- include('blog-list.ejs') %>
   </div>
 </body>
 <%- include('includes/end.ejs') %>
