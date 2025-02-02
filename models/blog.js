@@ -16,10 +16,6 @@ const Blog = sequelize.define('blog', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  date: {
-    type: Sequelize.DATE,
-    allowNull: false,
-  },
   content: {
     type: Sequelize.TEXT,
     allowNull: false,
@@ -28,3 +24,5 @@ const Blog = sequelize.define('blog', {
     type: Sequelize.ARRAY(Sequelize.STRING),
   },
 });
+
+module.exports = Blog;

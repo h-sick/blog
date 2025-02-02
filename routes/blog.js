@@ -8,4 +8,6 @@ const router = express.Router();
 
 router.get('/new', blogController.getNewBlog);
 
+router.post('/new', blogController.postNewBlog);
+
 module.exports = router;
