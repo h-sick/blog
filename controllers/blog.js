@@ -10,13 +10,13 @@ module.exports = {
     const title = req.body.title;
     const author = req.body.author;
     const content = req.body.content;
-    // const tags = req.body.tags;
+    const tags = req.body.tags;
 
     Blog.create({
       title,
       author,
       content,
-      // tags,
+      tags,
     }).then((result) => {
       res.redirect('/');
     });

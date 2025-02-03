@@ -21,7 +21,14 @@ const Blog = sequelize.define('blog', {
     allowNull: false,
   },
   tags: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
+    type: Sequelize.STRING,
+    get() {
+      const rawValue = this.getDataValue('tags');
+      return rawValue ? JSON.parse(rawValue) : [];
+    },
+    set(value) {
+      this.setDataValue('tags', JSON.stringify(value));
+    },
   },
 });
 
