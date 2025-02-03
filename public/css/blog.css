@@ -3,3 +3,34 @@
   height: 10rem;
   display: block;
 }
+
+.blog-item {
+  padding: 0.25rem;
+  margin: 0.25rem;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.date,
+.title,
+.tags,
+.author,
+.content {
+  padding: 0.25rem;
+  margin: 0.25rem;
+}
+
+.tags {
+  display: flex;
+  /* flex-wrap: wrap; */
+}
+
+.tags .tag {
+  padding: 0.25rem;
+  margin: 0.25rem;
+  margin-left: 0;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  color: white;
+}
