@@ -1,0 +1,17 @@
+<div class="blog-item">
+  <div class="tags">
+    <% if (blog.tags.length > 0) { %> <% blog.tags.forEach((tag) => { %>
+    <div class="tag"><%= tag %></div>
+    <% }) %> <% } else { %>
+    <div class="tag">No tags</div>
+    <% } %>
+  </div>
+  <div class="date">
+    <%= new Date(blog.updatedAt).toLocaleDateString('en-AU', { year: 'numeric',
+    month: '2-digit', day: '2-digit' }).replace(/\. /g, '.').replace('.', '') %>
+  </div>
+  <div class="title"><%= blog.title %></div>
+
+  <div class="author"><%= blog.author %></div>
+  <div class="content"><%= blog.content %></div>
+</div>

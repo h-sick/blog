@@ -22,7 +22,7 @@ app.use(errorController.get404);
 const port = 3000;
 
 sequelize
-  .sync({ force: true }) // 테이블을 강제로 다시 생성
+  .sync({ force: false })
   .then(() => {
     app.listen(port);
   })

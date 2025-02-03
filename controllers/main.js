@@ -1,7 +1,16 @@
+const Blog = require('../models/blog');
+
 module.exports = {
   getIndex: (req, res, next) => {
-    res.render('main', {
-      title: 'blog',
-    });
+    Blog.findAll()
+      .then((blogs) => {
+        res.render('main', {
+          title: 'Blogs',
+          blogs,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };

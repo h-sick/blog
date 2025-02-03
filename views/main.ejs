@@ -5,7 +5,13 @@
   <div class="blog-list">
     <button><a href="/blog/new">New Blog</a></button>
     <h1>blogs</h1>
-    <%- include('blog-list.ejs') %>
+    <% if (blogs.length === 0) { %>
+      <h2>No posts yet</h2>
+    <% } else { %>
+      <% blogs.forEach((blog) => { %>
+        <%- include('blog-item.ejs', { blog: blog }) %>
+      <% }) %>  
+    <% } %>
   </div>
 </body>
 <%- include('includes/end.ejs') %>
