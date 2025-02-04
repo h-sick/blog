@@ -12,13 +12,15 @@ module.exports = {
     const content = req.body.content;
     const tags = req.body.tags;
 
-    Blog.create({
-      title,
-      author,
-      content,
-      tags,
-    }).then((result) => {
-      res.redirect('/');
-    });
+    req.user
+      .createBlog({
+        title,
+        author,
+        content,
+        tags,
+      })
+      .then((result) => {
+        res.redirect('/');
+      });
   },
 };

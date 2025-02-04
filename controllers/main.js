@@ -2,7 +2,8 @@ const Blog = require('../models/blog');
 
 module.exports = {
   getIndex: (req, res, next) => {
-    Blog.findAll()
+    req.user
+      .getBlogs()
       .then((blogs) => {
         res.render('main', {
           title: 'Blogs',
