@@ -12,7 +12,7 @@ router.get('/', mainController.getIndex);
 
 module.exports = router;
 module.exports.userMiddleware = (req, res, next) => {
-  User.findById(1)
+  User.findByPk(1)
     .then((user) => {
       req.user = user;
       next();
