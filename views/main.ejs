@@ -9,7 +9,7 @@
       <h2>No posts yet</h2>
     <% } else { %>
       <% blogs.forEach((blog) => { %>
-        <%- include('blog-item.ejs', { blog: blog }) %>
+        <%- include('blog/blog-item.ejs', { blog: blog }) %>
       <% }) %>  
     <% } %>
   </div>

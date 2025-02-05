@@ -2,7 +2,7 @@ const Blog = require('../models/blog');
 
 module.exports = {
   getNewBlog: (req, res, next) => {
-    res.render('blog-new', {
+    res.render('blog/blog-new', {
       title: 'New Blog',
     });
   },
