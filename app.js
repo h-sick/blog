@@ -8,6 +8,7 @@ const sequelize = require('./database');
 
 const mainRoutes = require('./routes/main');
 const blogRoutes = require('./routes/blog');
+const authRoutes = require('./routes/auth');
 
 const Blog = require('./models/blog');
 const User = require('./models/user');
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(mainRoutes.userMiddleware);
 app.use(mainRoutes);
 app.use('/blog', blogRoutes);
+app.use(authRoutes);
 app.use(errorController.get404);
 
 Blog.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
@@ -45,7 +47,6 @@ sequelize
     return user;
   })
   .then((user) => {
-    console.log('User created =>\n', user);
     app.listen(port);
   })
   .catch((err) => {
