@@ -4,6 +4,11 @@ const bcrypt = require('bcrypt');
 const saltRounds = 12;
 
 module.exports = {
+  getLogin: (req, res, next) => {
+    res.render('auth/login', {
+      title: 'Login',
+    });
+  },
   getSignup: (req, res, next) => {
     res.render('auth/signup', {
       title: 'Signup',
