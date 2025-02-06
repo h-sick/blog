@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 
 const app = express();
 const errorController = require('./controllers/error');
@@ -41,7 +42,7 @@ sequelize
       return User.create({
         name: 'admin',
         email: 'hyosikkim1022@gmail.com',
-        password: 'q1w2e3r4!!',
+        password: bcrypt.hashSync('q1w2e3r4!!', 12),
       });
     }
     return user;
