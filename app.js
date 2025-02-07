@@ -1,7 +1,11 @@
+require('dotenv').config();
+
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
 const errorController = require('./controllers/error');
@@ -14,11 +18,29 @@ const authRoutes = require('./routes/auth');
 const Blog = require('./models/blog');
 const User = require('./models/user');
 
+// Session store initialization
+const sessionStore = new SequelizeStore({
+  db: sequelize,
+});
+
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Session setting
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: sessionStore,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24, // 1day
+    },
+  })
+);
 
 app.use(mainRoutes.userMiddleware);
 app.use(mainRoutes);
@@ -31,9 +53,11 @@ User.hasMany(Blog);
 
 const port = 3000;
 
-sequelize
-  // .sync({ force: true })
+sessionStore
   .sync()
+  .then(() => {
+    return sequelize.sync();
+  })
   .then((result) => {
     return User.findByPk(1);
   })
