@@ -42,6 +42,7 @@ app.use(
   })
 );
 
+app.use(authRoutes.authMiddleware);
 app.use(mainRoutes.userMiddleware);
 app.use(mainRoutes);
 app.use('/blog', blogRoutes);
@@ -57,19 +58,6 @@ sessionStore
   .sync()
   .then(() => {
     return sequelize.sync();
-  })
-  .then((result) => {
-    return User.findByPk(1);
-  })
-  .then((user) => {
-    if (!user) {
-      return User.create({
-        name: 'admin',
-        email: 'hyosikkim1022@gmail.com',
-        password: bcrypt.hashSync('q1w2e3r4!!', 12),
-      });
-    }
-    return user;
   })
   .then((user) => {
     app.listen(port);
