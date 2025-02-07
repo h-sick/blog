@@ -9,6 +9,37 @@ module.exports = {
       title: 'Login',
     });
   },
+  postLogin: (req, res, next) => {
+    const { email, password } = req.body;
+    User.findOne({ where: { email } })
+      .then((user) => {
+        if (!user) {
+          console.log('User not found');
+          return;
+        }
+        bcrypt
+          .compare(password, user.password)
+          .then((doMatch) => {
+            console.log({ doMatch });
+            if (doMatch) {
+              req.session.user = user;
+              req.session.isLoggedIn = true;
+              return req.session.save((err) => {
+                console.log(err);
+                res.redirect('/');
+              });
+            } else {
+              console.log('Password does not match');
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
   getSignup: (req, res, next) => {
     res.render('auth/signup', {
       title: 'Signup',
