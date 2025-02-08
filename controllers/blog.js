@@ -2,6 +2,10 @@ const Blog = require('../models/blog');
 
 module.exports = {
   getNewBlog: (req, res, next) => {
+    if (!req.user) {
+      return res.redirect('/');
+    }
+
     res.render('blog/blog-new', {
       title: 'New Blog',
     });

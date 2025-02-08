@@ -7,9 +7,11 @@
       <li class="main-header__item">
         <a href="/themes">Themes</a>
       </li>
+      <% if (isLoggedIn) { %>
       <li class="main-header__item">
         <a href="/blog/new">New Blog</a>
       </li>
+      <% } %>
       <!-- Search -->
     </ul>
     <ul class="main-header__item-list">
