@@ -1,4 +1,3 @@
-<div class="backdrop"></div>
 <header class="main-header">
   <nav class="main-header__nav">
     <ul class="main-header__item-list">
@@ -14,12 +13,20 @@
       <!-- Search -->
     </ul>
     <ul class="main-header__item-list">
+      <% if (isLoggedIn) { %>
+      <li class="main-header__item">
+        <form action="/logout" method="POST">
+          <button type="submit">Logout</button>
+        </form>
+      </li>
+      <% } else { %>
       <li class="main-header__item">
         <a href="/login">Login</a>
       </li>
       <li class="main-header__item">
         <a href="/signup">Signup</a>
       </li>
+      <% } %>
     </ul>
   </nav>
 </header>
