@@ -1,0 +1,16 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+  <%- include('../includes/navigation.ejs') %>
+  <div class="blog-list">
+    <h1>blogs</h1>
+    <% if (blogs.length === 0) { %>
+      <h2>No posts yet</h2>
+    <% } else { %>
+      <% blogs.forEach((blog) => { %>
+        <%- include('../blog/blog-item.ejs', { blog: blog }) %>
+      <% }) %>  
+    <% } %>
+  </div>
+</body>
+<%- include('../includes/end.ejs') %>

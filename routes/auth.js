@@ -34,5 +34,6 @@ module.exports.authMiddleware = (req, res, next) => {
 
 module.exports.isLoggedIn = (req, res, next) => {
   res.locals.isLoggedIn = req.session.isLoggedIn;
+  res.locals.userId = req.session.user?.id;
   next();
 };

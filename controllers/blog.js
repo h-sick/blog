@@ -27,4 +27,16 @@ module.exports = {
         res.redirect('/');
       });
   },
+  getUserBlogs: (req, res, next) => {
+    Blog.findAll({ where: { userId: req.params.id } })
+      .then((blogs) => {
+        res.render('blog/user-blogs', {
+          title: 'My Blogs',
+          blogs,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
