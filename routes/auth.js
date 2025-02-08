@@ -4,9 +4,13 @@ const authController = require('../controllers/auth');
 
 const router = express.Router();
 
+const User = require('../models/user');
+
 router.get('/login', authController.getLogin);
 
 router.post('/login', authController.postLogin);
+
+router.post('/logout', authController.postLogout);
 
 router.get('/signup', authController.getSignup);
 
@@ -26,4 +30,9 @@ module.exports.authMiddleware = (req, res, next) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+module.exports.isLoggedIn = (req, res, next) => {
+  res.locals.isLoggedIn = req.session.isLoggedIn;
+  next();
 };

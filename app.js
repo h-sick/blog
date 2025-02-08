@@ -43,7 +43,7 @@ app.use(
 );
 
 app.use(authRoutes.authMiddleware);
-app.use(mainRoutes.userMiddleware);
+app.use(authRoutes.isLoggedIn);
 app.use(mainRoutes);
 app.use('/blog', blogRoutes);
 app.use(authRoutes);

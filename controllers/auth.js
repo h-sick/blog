@@ -40,6 +40,12 @@ module.exports = {
         console.log(err);
       });
   },
+  postLogout: (req, res, next) => {
+    req.session.destroy((err) => {
+      console.log(err);
+      res.redirect('/');
+    });
+  },
   getSignup: (req, res, next) => {
     res.render('auth/signup', {
       title: 'Signup',
