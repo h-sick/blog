@@ -15,6 +15,8 @@ const mainRoutes = require('./routes/main');
 const blogRoutes = require('./routes/blog');
 const authRoutes = require('./routes/auth');
 
+const authMiddleware = require('./middleware/auth');
+
 const Blog = require('./models/blog');
 const User = require('./models/user');
 
@@ -42,8 +44,8 @@ app.use(
   })
 );
 
-app.use(authRoutes.authMiddleware);
-app.use(authRoutes.isLoggedIn);
+app.use(authMiddleware.setUser);
+app.use(authMiddleware.setLocals);
 app.use(mainRoutes);
 app.use('/blog', blogRoutes);
 app.use(authRoutes);
