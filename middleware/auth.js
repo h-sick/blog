@@ -1,5 +1,10 @@
+const User = require('../models/user');
+
 module.exports = {
   setUser: (req, res, next) => {
+    if (!req.session.user) {
+      return next();
+    }
     User.findByPk(req.session.user.id)
       .then((user) => {
         req.user = user;
