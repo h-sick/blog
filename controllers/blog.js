@@ -39,4 +39,20 @@ module.exports = {
         console.log(err);
       });
   },
+  getBlogDetail: (req, res, next) => {
+    const blogId = req.params.id;
+    Blog.findByPk(blogId)
+      .then((blog) => {
+        if (!blog) {
+          return res.redirect('/');
+        }
+        res.render('blog/blog-detail', {
+          title: blog.title,
+          blog: blog,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };

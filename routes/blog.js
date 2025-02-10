@@ -11,6 +11,8 @@ router.get('/new', isLoggedIn, blogController.getNewBlog);
 
 router.post('/new', isLoggedIn, blogController.postNewBlog);
 
-router.get('/:id', isLoggedIn, blogController.getUserBlogs);
+router.get('/:id', blogController.getBlogDetail);
+
+router.get('/user/:id', isLoggedIn, blogController.getUserBlogs);
 
 module.exports = router;

@@ -1,0 +1,33 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+  <%- include('../includes/navigation.ejs') %>
+  <div class="blog-detail">
+    <div class="blog-header">
+      <h1 class="title"><%= blog.title %></h1>
+      <div class="meta">
+        <span class="author">By <%= blog.author %></span>
+        <span class="date">
+          <%= new Date(blog.updatedAt).toLocaleDateString('en-AU', { 
+            year: 'numeric',
+            month: 'long', 
+            day: 'numeric' 
+          }) %>
+        </span>
+      </div>
+      <div class="tags">
+        <% if (blog.tags && blog.tags.length > 0) { %> 
+          <% blog.tags.forEach((tag) => { %>
+            <span class="tag"><%= tag %></span>
+          <% }) %> 
+        <% } else { %>
+          <span class="tag">No tags</span>
+        <% } %>
+      </div>
+    </div>
+    <div class="content">
+      <%= blog.content %>
+    </div>
+  </div>
+</body>
+<%- include('../includes/end.ejs') %>

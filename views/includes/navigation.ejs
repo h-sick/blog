@@ -17,7 +17,7 @@
     <ul class="main-header__item-list">
       <% if (isLoggedIn) { %>
       <li class="main-header__item">
-        <a href="/blog/<%= userId %>">My Blogs</a>
+        <a href="/blog/user/<%= userId %>">My Blogs</a>
       </li>
       <li class="main-header__item">
         <form action="/logout" method="POST">
