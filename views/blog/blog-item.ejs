@@ -1,17 +1,23 @@
 <div class="blog-item" onclick="location.href='/blog/<%= blog.id %>'">
+  <div class="title"><%= blog.title %></div>
+  <div class="meta">
+    <span class="author">By <%= blog.author %></span>
+    <span class="date">
+      <%= new Date(blog.updatedAt).toLocaleDateString('en-AU', { 
+        year: 'numeric',
+        month: 'long', 
+        day: 'numeric' 
+      }) %>
+    </span>
+  </div>
   <div class="tags">
-    <% if (blog.tags && blog.tags.length > 0) { %> <% blog.tags.forEach((tag) =>
-    { %>
-    <div class="tag"><%= tag %></div>
-    <% }) %> <% } else { %>
-    <div class="tag">No tags</div>
+    <% if (blog.tags && blog.tags.length > 0) { %>
+      <% blog.tags.forEach((tag) => { %>
+        <span class="tag"><%= tag %></span>
+      <% }) %>
+    <% } else { %>
+      <span class="tag">No tags</span>
     <% } %>
   </div>
-  <div class="date">
-    <%= new Date(blog.updatedAt).toLocaleDateString('en-AU', { year: 'numeric',
-    month: '2-digit', day: '2-digit' }).replace(/\//g, '.') %>
-  </div>
-  <div class="title"><%= blog.title %></div>
-  <div class="author"><%= blog.author %></div>
   <div class="content"><%= blog.content %></div>
 </div>
