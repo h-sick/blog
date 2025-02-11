@@ -102,3 +102,68 @@
   color: #444;
   white-space: pre-wrap;
 }
+
+.blog-actions {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+}
+.blog-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.edit-btn {
+  background-color: #4caf50;
+  color: white;
+}
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+.edit-btn:hover {
+  background-color: #45a049;
+}
+.delete-btn:hover {
+  background-color: #da190b;
+}
+
+/* Blog Edit Page */
+.blog-edit {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+.blog-edit form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.blog-edit form div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.blog-edit input,
+.blog-edit textarea,
+.blog-edit select {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.blog-edit textarea {
+  min-height: 200px;
+}
+.blog-edit button {
+  padding: 0.5rem 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.blog-edit button:hover {
+  background-color: #45a049;
+}

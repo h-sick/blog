@@ -1,0 +1,40 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+  <%- include('../includes/navigation.ejs') %>
+  <div class="blog-edit">
+    <h1>Edit Blog</h1>
+    <form action="/blog/edit/<%= blog.id %>" method="POST">
+      <div>
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" value="<%= blog.title %>" required>
+      </div>
+      <div class="content">
+        <label for="content">Content</label>
+        <textarea name="content" id="content" required><%= blog.content %></textarea>
+      </div>
+      <div>
+        <label for="author">Author</label>
+        <input type="text" name="author" id="author" value="<%= blog.author %>" required>
+      </div>
+      <div>
+        <label for="tags">Tags</label>
+        <select name="tags" id="tags" multiple>
+          <option value="life" <%= blog.tags && blog.tags.includes('life') ? 'selected' : '' %>>Life</option>
+          <option value="general" <%= blog.tags && blog.tags.includes('general') ? 'selected' : '' %>>General</option>
+          <option value="travel" <%= blog.tags && blog.tags.includes('travel') ? 'selected' : '' %>>Travel</option>
+          <option value="fashion" <%= blog.tags && blog.tags.includes('fashion') ? 'selected' : '' %>>Fashion</option>
+          <option value="food" <%= blog.tags && blog.tags.includes('food') ? 'selected' : '' %>>Food</option>
+          <option value="tech" <%= blog.tags && blog.tags.includes('tech') ? 'selected' : '' %>>Tech</option>
+          <option value="random" <%= blog.tags && blog.tags.includes('random') ? 'selected' : '' %>>Random</option>
+          <option value="music" <%= blog.tags && blog.tags.includes('music') ? 'selected' : '' %>>Music</option>
+          <option value="movie" <%= blog.tags && blog.tags.includes('movie') ? 'selected' : '' %>>Movie</option>
+          <option value="sport" <%= blog.tags && blog.tags.includes('sport') ? 'selected' : '' %>>Sport</option>
+          <option value="book" <%= blog.tags && blog.tags.includes('book') ? 'selected' : '' %>>Book</option>
+        </select>
+      </div>
+      <button type="submit">Update</button>
+    </form>
+  </div>
+</body>
+<%- include('../includes/end.ejs') %>

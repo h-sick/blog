@@ -5,6 +5,12 @@
   <div class="blog-detail">
     <div class="blog-header">
       <h1 class="title"><%= blog.title %></h1>
+      <% if (locals.userId === blog.userId) { %>
+      <div class="blog-actions">
+        <button class="edit-btn" onclick="editBlog('<%= blog.id %>')">수정</button>
+        <button class="delete-btn" onclick="deleteBlog('<%= blog.id %>')">삭제</button>
+      </div>
+      <% } %>
       <div class="meta">
         <span class="author">By <%= blog.author %></span>
         <span class="date">
@@ -29,5 +35,29 @@
       <%= blog.content %>
     </div>
   </div>
+  <script>
+    function editBlog(blogId) {
+      window.location.href = `/blog/edit/${blogId}`;
+    }
+
+    function deleteBlog(blogId) {
+      if (confirm('Are you sure you want to delete this blog?')) {
+        fetch(`/blog/delete/${blogId}`, {
+          method: 'DELETE'
+        })
+        .then(response => {
+          if (response.ok) {
+            window.location.href = '/blog';
+          } else {
+            alert('Something went wrong');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred');
+        });
+      }
+    }
+  </script>
 </body>
 <%- include('../includes/end.ejs') %>

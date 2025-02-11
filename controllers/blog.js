@@ -55,4 +55,76 @@ module.exports = {
         console.log(err);
       });
   },
+  getEditBlog: (req, res, next) => {
+    const blogId = req.params.id;
+    Blog.findByPk(blogId)
+      .then((blog) => {
+        if (!blog) {
+          return res.redirect('/');
+        }
+        // Only the author of the blog can edit
+        if (blog.userId !== req.user.id) {
+          return res.redirect('/');
+        }
+        res.render('blog/blog-edit', {
+          title: 'Edit Blog',
+          blog: blog,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.redirect('/');
+      });
+  },
+  postEditBlog: (req, res, next) => {
+    const blogId = req.params.id;
+    const updatedTitle = req.body.title;
+    const updatedAuthor = req.body.author;
+    const updatedContent = req.body.content;
+    const updatedTags = req.body.tags;
+
+    Blog.findByPk(blogId)
+      .then((blog) => {
+        if (!blog) {
+          return res.redirect('/');
+        }
+        // Only the author of the blog can edit
+        if (blog.userId !== req.user.id) {
+          return res.redirect('/');
+        }
+        blog.title = updatedTitle;
+        blog.author = updatedAuthor;
+        blog.content = updatedContent;
+        blog.tags = updatedTags;
+        return blog.save();
+      })
+      .then(() => {
+        res.redirect('/blog/' + blogId);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.redirect('/');
+      });
+  },
+  deleteBlog: (req, res, next) => {
+    const blogId = req.params.id;
+    Blog.findByPk(blogId)
+      .then((blog) => {
+        if (!blog) {
+          return res.status(404).json({ message: "Can't find the blog." });
+        }
+        // Only the author of the blog can delete
+        if (blog.userId !== req.user.id) {
+          return res.status(403).json({ message: 'Forbidden' });
+        }
+        return blog.destroy();
+      })
+      .then(() => {
+        res.status(200).json({ message: 'Blog deleted successfully.' });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: 'Server error occurred.' });
+      });
+  },
 };
