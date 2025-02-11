@@ -1,7 +1,86 @@
-.blog-new .content textarea {
-  width: 50%;
-  height: 10rem;
+/* Blog New Page */
+.blog-new {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.blog-new h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.blog-new .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.blog-new label {
   display: block;
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.blog-new input,
+.blog-new textarea,
+.blog-new select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #333;
+  transition: border-color 0.2s ease;
+}
+
+.blog-new input:focus,
+.blog-new textarea:focus,
+.blog-new select:focus {
+  outline: none;
+  border-color: #4caf50;
+}
+
+.blog-new textarea {
+  min-height: 300px;
+  resize: vertical;
+}
+
+.blog-new select {
+  height: auto;
+  min-height: 120px;
+}
+
+.blog-new small {
+  display: block;
+  color: #666;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.blog-new .form-actions {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.blog-new .submit-btn {
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.blog-new .submit-btn:hover {
+  background-color: #45a049;
 }
 
 .blog-item {
