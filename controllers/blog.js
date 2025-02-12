@@ -1,3 +1,5 @@
+const { Op } = require('sequelize');
+
 const Blog = require('../models/blog');
 
 module.exports = {
@@ -125,6 +127,56 @@ module.exports = {
       .catch((err) => {
         console.log(err);
         res.status(500).json({ message: 'Server error occurred.' });
+      });
+  },
+  getThemes: (req, res, next) => {
+    const availableTags = [
+      'life',
+      'general',
+      'travel',
+      'fashion',
+      'food',
+      'tech',
+      'random',
+      'music',
+      'movie',
+      'sport',
+      'book',
+    ];
+
+    // Get the selected tag from query parameter
+    const selectedTag = req.query.tag;
+    let blogQuery;
+
+    if (selectedTag) {
+      // If a tag is selected, find blogs with that tag
+      blogQuery = Blog.findAll({
+        where: {
+          tags: {
+            [Op.like]: `%${selectedTag}%`,
+          },
+        },
+        order: [['createdAt', 'DESC']],
+      });
+    } else {
+      // If no tag is selected, get all blogs
+      blogQuery = Blog.findAll({
+        order: [['createdAt', 'DESC']],
+      });
+    }
+
+    blogQuery
+      .then((blogs) => {
+        res.render('blog/themes', {
+          title: selectedTag ? `${selectedTag} Blogs` : 'Themes',
+          blogs: blogs,
+          availableTags: availableTags,
+          selectedTag: selectedTag,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.redirect('/');
       });
   },
 };

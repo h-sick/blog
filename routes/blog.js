@@ -17,8 +17,10 @@ router.post('/edit/:id', isLoggedIn, blogController.postEditBlog);
 
 router.delete('/delete/:id', isLoggedIn, blogController.deleteBlog);
 
-router.get('/:id', blogController.getBlogDetail);
+router.get('/themes', blogController.getThemes);
 
 router.get('/user/:id', isLoggedIn, blogController.getUserBlogs);
+
+router.get('/:id', blogController.getBlogDetail);
 
 module.exports = router;

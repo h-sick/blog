@@ -1,0 +1,34 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <main class="main-content">
+        <div class="themes-container">
+            <div class="themes-header">
+                <h1><%= title %></h1>
+                <div class="themes-tags">
+                    <a href="/blog/themes" class="theme-tag <%= !selectedTag ? 'active' : '' %>">All</a>
+                    <% for (let tag of availableTags) { %>
+                        <a href="/blog/themes?tag=<%= tag %>" 
+                           class="theme-tag <%= selectedTag === tag ? 'active' : '' %>">
+                            <%= tag %>
+                        </a>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="blog-grid">
+                <% if (blogs.length > 0) { %>
+                    <% for (let blog of blogs) { %>
+                        <%- include('./blog-item.ejs', { blog: blog }) %>
+                    <% } %>
+                <% } else { %>
+                    <p class="no-blogs">No blogs found for this theme.</p>
+                <% } %>
+            </div>
+        </div>
+    </main>
+
+<%- include('../includes/end.ejs') %>
