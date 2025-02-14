@@ -76,12 +76,15 @@ module.exports = {
         req.session.user = user;
         req.session.isLoggedIn = true;
 
-        // if (rememberMe) {
-        //   req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // 30 days
-        // }
+        if (rememberMe === 'on') {
+          req.session.cookie.maxAge = 7 * 24 * 60 * 60 * 1000; // 7days
+        }
 
         return req.session.save((err) => {
-          if (err) console.log(err);
+          if (err) {
+            console.log('Session save error:', err);
+            return next(err);
+          }
           res.redirect('/');
         });
       }
@@ -104,8 +107,14 @@ module.exports = {
     }
   },
   postLogout: (req, res, next) => {
+    // Delete session
     req.session.destroy((err) => {
-      console.log(err);
+      if (err) {
+        console.error('Session destroy error:', err);
+        return next(err);
+      }
+      // Delete session cookie
+      res.clearCookie('connect.sid');
       res.redirect('/');
     });
   },

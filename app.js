@@ -23,6 +23,8 @@ const User = require('./models/user');
 // Session store initialization
 const sessionStore = new SequelizeStore({
   db: sequelize,
+  // expiration: 0, // Set to 0 to disable session expiration
+  checkExpirationInterval: 15 * 60 * 1000, // 15 minutes
 });
 
 app.set('view engine', 'ejs');
@@ -39,7 +41,11 @@ app.use(
     saveUninitialized: false,
     store: sessionStore,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24, // 1day
+      // maxAge: 0, // Set to 0 to disable session expiration
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      httpOnly: true,
+      // secure: process.env.NODE_ENV === 'production',
+      sameSite: true, // CSRF protection
     },
   })
 );
@@ -60,6 +66,7 @@ sessionStore
   .sync()
   .then(() => {
     return sequelize.sync();
+    // return sequelize.sync({ force: true });
   })
   .then((user) => {
     app.listen(port);
