@@ -23,7 +23,8 @@
       </div>
       <div class="tags">
         <% if (blog.tags && blog.tags.length > 0) { %> 
-          <% blog.tags.forEach((tag) => { %>
+          <% blog.tags.split(',').map(tag => tag.trim()).filter(tag => tag.length >
+          0).forEach((tag) => { %>
             <span class="tag"><%= tag %></span>
           <% }) %> 
         <% } else { %>

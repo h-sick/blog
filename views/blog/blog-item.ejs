@@ -3,20 +3,17 @@
   <div class="meta">
     <span class="author">By <%= blog.author %></span>
     <span class="date">
-      <%= new Date(blog.updatedAt).toLocaleDateString('en-AU', { 
-        year: 'numeric',
-        month: 'long', 
-        day: 'numeric' 
-      }) %>
+      <%= new Date(blog.updatedAt).toLocaleDateString('en-AU', { year:
+      'numeric', month: 'long', day: 'numeric' }) %>
     </span>
   </div>
   <div class="tags">
-    <% if (blog.tags && blog.tags.length > 0) { %>
-      <% blog.tags.forEach((tag) => { %>
-        <span class="tag"><%= tag %></span>
-      <% }) %>
-    <% } else { %>
-      <span class="tag">No tags</span>
+    <% if (blog.tags && blog.tags.length > 0) { %> <%
+    blog.tags.split(',').map(tag => tag.trim()).filter(tag => tag.length >
+    0).forEach((tag) => { %>
+    <span class="tag"><%= tag %></span>
+    <% }) %> <% } else { %>
+    <span class="tag">No tags</span>
     <% } %>
   </div>
   <div class="content"><%= blog.content %></div>
