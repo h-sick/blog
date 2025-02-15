@@ -2,22 +2,41 @@
   <nav class="main-header__nav">
     <ul class="main-header__item-list">
       <li class="main-header__item">
-        <a href="/">Home</a>
+        <a href="/" class="<%= path === '/' ? 'active' : '' %>">Home</a>
       </li>
       <li class="main-header__item">
-        <a href="/blog/themes">Themes</a>
+        <a href="/blog/themes" class="<%= path === '/blog/themes' ? 'active' : '' %>">Themes</a>
       </li>
       <% if (isLoggedIn) { %>
       <li class="main-header__item">
-        <a href="/blog/new">New Blog</a>
+        <a href="/blog/new" class="<%= path === '/blog/new' ? 'active' : '' %>">New Blog</a>
       </li>
       <% } %>
-      <!-- Search -->
     </ul>
+
+    <div class="main-header__search">
+      <form action="/blog/search" method="GET" class="search-form">
+        <input 
+          type="search" 
+          name="q" 
+          placeholder="Search blogs..."
+          aria-label="Search"
+          class="search-input"
+          value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>"
+        >
+        <button type="submit" class="search-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </form>
+    </div>
+
     <ul class="main-header__item-list">
       <% if (isLoggedIn) { %>
       <li class="main-header__item">
-        <a href="/blog/user/<%= userId %>">My Blogs</a>
+        <a href="/blog/user/<%= userId %>" class="<%= path === '/blog/user/' + userId ? 'active' : '' %>">My Blogs</a>
       </li>
       <li class="main-header__item">
         <form action="/logout" method="POST">
@@ -26,10 +45,10 @@
       </li>
       <% } else { %>
       <li class="main-header__item">
-        <a href="/login">Login</a>
+        <a href="/login" class="<%= path === '/login' ? 'active' : '' %>">Login</a>
       </li>
       <li class="main-header__item">
-        <a href="/signup">Signup</a>
+        <a href="/signup" class="<%= path === '/signup' ? 'active' : '' %>">Signup</a>
       </li>
       <% } %>
     </ul>
