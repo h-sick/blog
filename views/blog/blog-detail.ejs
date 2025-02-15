@@ -22,11 +22,16 @@
         </span>
       </div>
       <div class="tags">
-        <% if (blog.tags && blog.tags.length > 0) { %> 
-          <% blog.tags.split(',').map(tag => tag.trim()).filter(tag => tag.length >
-          0).forEach((tag) => { %>
+        <% 
+        const tags = blog.tags || '';
+        const tagList = typeof tags === 'string' ? 
+          tags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0) : 
+          Array.isArray(tags) ? tags : [];
+        %>
+        <% if (tagList.length > 0) { %>
+          <% tagList.forEach(tag => { %>
             <span class="tag"><%= tag %></span>
-          <% }) %> 
+          <% }); %>
         <% } else { %>
           <span class="tag">No tags</span>
         <% } %>
