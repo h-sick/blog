@@ -7,7 +7,6 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const helmet = require('helmet');
 const compression = require('express-compression');
 const logger = require('./logger');
 
@@ -34,7 +33,6 @@ const sessionStore = new SequelizeStore({
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-app.use(helmet());
 app.use(compression());
 app.use(logger);
 
