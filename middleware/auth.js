@@ -17,6 +17,7 @@ module.exports = {
   setLocals: (req, res, next) => {
     res.locals.isLoggedIn = req.session.isLoggedIn;
     res.locals.userId = req.session.user?.id;
+    res.locals.path = req.path;
     next();
   },
   isLoggedIn: (req, res, next) => {
