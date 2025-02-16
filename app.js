@@ -7,6 +7,10 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+const helmet = require('helmet');
+const compression = require('express-compression');
+const logger = require('./logger');
+
 const app = express();
 const errorController = require('./controllers/error');
 const sequelize = require('./database');
@@ -29,6 +33,10 @@ const sessionStore = new SequelizeStore({
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+
+app.use(helmet());
+app.use(compression());
+app.use(logger);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -69,7 +77,7 @@ sessionStore
     // return sequelize.sync({ force: true });
   })
   .then((user) => {
-    app.listen(port);
+    app.listen(process.env.PORT || port);
   })
   .catch((err) => {
     console.log(err);
