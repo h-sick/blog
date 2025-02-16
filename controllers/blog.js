@@ -1,6 +1,8 @@
 const { Op } = require('sequelize');
+const sanitizeHtml = require('sanitize-html');
 
 const Blog = require('../models/blog');
+const User = require('../models/user');
 
 module.exports = {
   getNewBlog: (req, res, next) => {
@@ -178,5 +180,32 @@ module.exports = {
         console.log(err);
         res.redirect('/');
       });
+  },
+  search: async (req, res, next) => {
+    try {
+      const searchQuery = sanitizeHtml(req.query.q?.trim());
+      if (!searchQuery) {
+        return res.redirect('/');
+      }
+
+      const blogs = await Blog.findAll({
+        where: {
+          [Op.or]: [
+            { title: { [Op.like]: `%${searchQuery}%` } },
+            { content: { [Op.like]: `%${searchQuery}%` } },
+          ],
+        },
+        include: [{ model: User }],
+        order: [['createdAt', 'DESC']],
+      });
+
+      res.render('main', {
+        title: `Search: ${searchQuery}`,
+        blogs: blogs,
+      });
+    } catch (err) {
+      console.error('Search error:', err);
+      next(err);
+    }
   },
 };
